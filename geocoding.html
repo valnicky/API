@@ -37,6 +37,21 @@
 			position: relative;
 			margin-left: 10px;
 		}
+
+		#toggle-drawing {
+			width: 27%;
+			position: relative;
+			margin-left: 10px;
+		}
+
+		#zoom-to-area-text {
+			position: relative;
+			width: 70%;
+		}
+
+		#zoom-to-area {
+			width: 24%;
+		}
 		
 	</style>
 </head>
@@ -50,6 +65,11 @@
 				<hr>
 			<span class='text'>Draw a shape to search within it for homes!</span>
 			<input id="toggle-drawing" type="button" value="Drawing Tools">
+			</div>
+			<hr>
+			<div>
+				<input id="zoom-to-area-text" type="text" placeholder="Enter your favorite area!">
+				<input id="zoom-to-area" type="button" value="Zoom">
 			</div>
 	<div id="map"></div>
 	</div>
@@ -222,6 +242,10 @@
 				toggleDrawing(drawingManager);
 			});
 
+			document.getElementById('zoom-to-area').addEventListener('click', function () {
+				zoomToArea();
+			});
+
 			//add an event listener so that the polygon is captured, call the searchWithinPolygon function. This will show the markers in the polygon, and hide any outside of it
 			drawingManager.addListener('overlaycomplete', function(event) {
 				//First check if there is an existing polygon
@@ -345,6 +369,31 @@ function searchWithinPolygon () {
 	}
 }
 
+//this function takes the input value in the find nearby area text input lacates it, and then zooms into that area. This is so that the user can show all listings then decide to focus on one area of the map
+
+function zoomToArea() {
+	//initialize the geocoder
+	var geocoder = new google.maps.Gepcoder();
+	//get the address or place that the user entered
+	var address = document.getElementById('zoom-to-area-text').value;
+	//make sure the address isn't blank
+	if (address == '') {
+		window.alert('You must enter an area or address.');
+	} else {
+		//geocode the address/area entered to get the center Then center the map on it and zoom in
+		geocoder.geocode({
+			address: address,
+			componentRestrictions: {locality: 'New York'}
+		}, function(results, status) {
+			if(status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				map.setZoom(15);
+			} else {
+				window.alert('We could not find that location - try entering a more specific place.');
+			}
+		});
+	}
+}
 		}
 	</script>
 	<script async defer
