@@ -100,20 +100,7 @@
 				styles: styles,
 				mapTypeControl: false
 			});
-			/*
-			var tribeca = {lat: 40.719526, lng: -74.0089934};
-			var marker = new google.maps.Marker({
-				position: tribeca,
-				map: map,
-				title: 'First Marker!'
-			});
-			var infoWindow = new google.maps.InfoWindow({
-				content: 'Do you ever feel '
-			});
-			marker.addListener('click', function() {
-				infoWindow.open(map, marker);
-			});*/
-
+			
 			var largeInfowindow = new google.maps.InfoWindow();
 			var bounds = new google.maps.LatLngBounds();
 			//the following group uses the location array to create an array of markers on initialize
@@ -189,10 +176,13 @@
 					infowindow.addListener('closeclick', function(){
 						infowindow.setMarker(null);
 					});
-				}
-			}
 
-		//this function will loop through the markers array and display them all
+
+				}
+
+
+			}
+			//this function will loop through the markers array and display them all
 		function showListings() {
 			var bounds = new google.maps.LatLngBounds();
 			//extend the boundaries of the map for each marker and display the marker
@@ -203,7 +193,9 @@
 			map.fitBounds(bounds);
 		}
 
-		}
+}
+			
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzBxakJgyoP72UvsoJ6F-lpWCSGKl20IQ&callback=initMap">

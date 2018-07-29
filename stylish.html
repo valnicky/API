@@ -108,10 +108,10 @@
 			//create a highlighted location marker color for when the user mouses over the marker
 			var highlightedIcon = makeMarkerIcon('FFFF24');
 
-			/*var bounds = new google.maps.LatLngBounds();*/
+			var bounds = new google.maps.LatLngBounds();
 			//the following group uses the location array to create an array of markers on initialize
 
-			for(var i = 0; i < locations.length; i++) {
+			/*for(var i = 0; i < locations.length; i++) {
 				//get the position from the location array
 				var position = locations[i].location;
 				var title = locations[i].title;
@@ -122,7 +122,7 @@
 					title: title,
 					animation: google.maps.Animation.DROP,
 					id: i
-				});
+				});*/
 				//push the marker to our array of markers
 				markers.push(marker);
 				//extend the boundaries of the map for each marker
@@ -214,9 +214,7 @@
 				);
 			return markerImage;
 		}
-
-
-		}
+		
 	</script>
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzBxakJgyoP72UvsoJ6F-lpWCSGKl20IQ&callback=initMap">
